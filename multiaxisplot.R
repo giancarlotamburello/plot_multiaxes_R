@@ -16,7 +16,13 @@ plotMaxis=function(df1=NULL,df2=NULL,df3=NULL,df4=NULL,xlab="",xlim=NULL,
   dn3[,2]=normalize(df3[,2])
   dn4[,2]=normalize(df4[,2])
   
-  par(mar=c(5.1,10.1,4.1,10.1))
+  par(mar=c(5.1,6.1,4.1,6.1))
+  if (!is.null(df3) & is.null(df4)) {
+    par(mar=c(5.1,10.1,4.1,6.1))  
+  }else if (!is.null(df4)) {
+    par(mar=c(5.1,10.1,4.1,10.1))  
+  }
+  
   
   # Plot number 1
   plot(dn1,yaxs="i",ylab="",xlab=xlab,ylim=c(-0.05,1.05),yaxt="n",xlim=xlim,
@@ -59,6 +65,19 @@ plotMaxis(df1 =  soil1[,1:2],df2 =  vlp,
           ylabels = c("CO₂ soil flux","VLP/day","Blue channel anomaly","SO₂ flux (ton/day)"),
           color = c("purple","darkgray","black","orange") )
 
+abline(v=as.numeric(strptime("220803","%y%m%d")),lwd=4,col="lightgray")
+abline(v=as.numeric(strptime("221005","%y%m%d")),lwd=4,col="lightgray")
+abline(v=as.numeric(strptime("240123","%y%m%d")),lwd=4,col="lightgray")
+abline(v=as.numeric(strptime("210906","%y%m%d")),lwd=2,lty=2,col="red")
+abline(v=as.numeric(strptime("220522","%d%m%y")),lwd=2,lty=2,col="red")
+
+
+plotMaxis(df2 =  fum1[,c("time","FA")],
+          df1 =  data.frame(eeh1$time,rowSums(log10(eeh3$B2+.99))),
+          #xlim=c(1600983940,1705245201),
+          type=c("b","b"),xlab = "Years",pch =c(16,16),lwd=c(2,2,2,2),
+          ylabels = c("Blue channel anomaly","CO₂ mol%"),
+          color = c("black","blue") )
 abline(v=as.numeric(strptime("220803","%y%m%d")),lwd=4,col="lightgray")
 abline(v=as.numeric(strptime("221005","%y%m%d")),lwd=4,col="lightgray")
 abline(v=as.numeric(strptime("240123","%y%m%d")),lwd=4,col="lightgray")
