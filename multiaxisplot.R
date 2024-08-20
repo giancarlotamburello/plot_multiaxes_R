@@ -1,4 +1,4 @@
-plotMaxis=function(df1=NULL,df2=NULL,df3=NULL,df4=NULL,xlab="",xlim=NULL,xaxt="s",
+plotMaxis <- function(df1=NULL,df2=NULL,df3=NULL,df4=NULL,xlab="",xlim=NULL,xaxt="s",
                    ylabels=c("DF1","DF2","DF3","DF4"),pch=c(1,1,1,1),lwd=c(1,1,1,1),
                    lty=c(1,1,1,1),
                    type=c("p","p","p","p"),color=c("black","red","blue","purple"),
@@ -11,12 +11,15 @@ plotMaxis=function(df1=NULL,df2=NULL,df3=NULL,df4=NULL,xlab="",xlim=NULL,xaxt="s
     if (compl.cases) {return(x[complete.cases(x),])}
     else{return(x)}
   }
-  dn1=df1;dn2=df2;dn3=df3;dn4=df4
+  dn1 <- df1
+  dn2 <- df2
+  dn3 <- df3
+  dn4 <- df4
   
-  dn1[,2]=normalize(df1[,2])
-  dn2[,2]=normalize(df2[,2])+vert.shift
-  dn3[,2]=normalize(df3[,2])+vert.shift*2
-  dn4[,2]=normalize(df4[,2])+vert.shift*3
+  dn1[,2] <- normalize(df1[,2])
+  dn2[,2] <- normalize(df2[,2])+vert.shift
+  dn3[,2] <- normalize(df3[,2])+vert.shift*2
+  dn4[,2] <- normalize(df4[,2])+vert.shift*3
   
   par(mar=c(5.1,6.1,4.1,6.1))
   if (!is.null(df3) & is.null(df4)) {
